@@ -1,0 +1,118 @@
+
+import java.util.Scanner;
+
+public class double_ll {
+    class Node{
+       private int data;
+    private Node next;
+        private Node priv;
+
+        public Node(int data) {
+            this.data = data;
+        }
+
+        public Node(int data, Node next, Node priv) {
+            this.data = data;
+            this.next = next;
+            this.priv = priv;
+        }
+    }
+    Node head=null;
+    Node tail=null;
+    public void add_at_beg(int data){
+        Node temp=new Node(data,head,null);
+        if (head!=null){
+            head.priv=temp;
+        }
+        head=temp;
+        if (tail==null){
+            tail=head;
+        }
+    }//node at begning
+public void display(){
+        Node temp=head;
+        while(temp!=null){
+            System.out.print("  "+temp.data);
+            temp=temp.next;
+        }
+
+}//for dispalying data from frount;
+    public void display_back(){
+       // Node temp=head;
+        while(tail!=null){
+            System.out.print("  "+tail.data);
+            tail=tail.priv;
+        }
+
+    }//for displaying data from backword
+    public void add_at_end(int data){
+        Node ptr=new Node(data);
+        ptr.priv=tail;
+        tail.next=ptr;
+        tail=ptr;
+    }
+    public void add_at_mid(int data,int element){
+        Node temp=new Node(data);
+        Node ptr=head;
+        Node next=head;
+        while (ptr.next.data!=element){
+          ptr=ptr.next;
+        }
+        next=ptr.next;
+        ptr.next=temp;
+        temp.priv=ptr;
+        temp.next=next;
+        next.priv=temp;
+    }
+    public static void main(String[] args) {
+        double_ll list=new double_ll();
+//        list.add_at_beg(1);
+//        list.add_at_beg(2);
+//        list.add_at_beg(3);
+//        list.add_at_beg(4);
+//        list.add_at_beg(5);
+//        list.add_at_beg(7);
+//        list.add_at_beg(8);
+//        list.add_at_end(9);
+//        list.add_at_mid(15,5);
+//        list.display();
+        //System.out.println();
+        //list.display_back();
+        Scanner s=new Scanner(System.in);
+
+        do {
+
+
+            System.out.println("ENTER 1 FOR ADD AT BEGNING");
+            System.out.println("NETER 2 FOR ADD AT END ");
+            System.out.println("ENTER 3 FOR ADD AT MIDDLE");
+            System.out.println("ENTER 4 FOR DISPLAY FROM FROUNT");
+            System.out.println("ENTER 5 FOR DISPLAY FROM BACK");
+            System.out.println("ENTER 6 FOR EXIT");
+            int ch=s.nextInt();
+
+            if (ch==1){
+                System.out.println("ENTER DATA");
+                int value=s.nextInt();
+                list.add_at_beg(value);
+            } else if (ch==2) {
+                System.out.println("ENTER DATA");
+                int value=s.nextInt();
+                list.add_at_end(value);
+            } else if (ch==3) {
+                System.out.println("ENTER DATA");
+                int value=s.nextInt();
+                System.out.println("ENTER THE VALUE  WHERE TO INSERT");
+                int val=s.nextInt();
+                list.add_at_mid(value,val);
+            } else if (ch==4) {
+                list.display();
+
+            } else if (ch==5) {
+                list.display_back();
+            } else  {
+                break;
+            }
+        }while(true);
+    }
+}
