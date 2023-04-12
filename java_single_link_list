@@ -1,0 +1,133 @@
+
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class ll {
+    private node head;
+    private node tail;
+    private int size;
+
+    public ll() {
+        this.size = 0;
+    }//this is the function for increasing the size ;
+
+    public void insertbeg(int val) {
+        node Node = new node(val);
+        Node.next = head;
+        head = Node;
+        if (tail == null) {
+            tail = head;
+        }//this is the function for  add the new node at the bignning;;
+
+        size += 1;
+    }
+
+    public void display() {
+        node temp = head;
+        while (temp != null) {
+            System.out.print(temp.value + " ->");
+            temp = temp.next;
+        }
+    }//for displaying the linklist;;
+
+    public void insertatend(int val) {
+        node Node = new node(val);
+        node temp = head;
+        if (head == null) {
+            head = Node;
+            size += 1;
+        } else {
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = Node;
+            size += 1;
+        }
+
+    }
+
+    public void isertAtMid(int val, int data) {
+        node ptr = new node(val);
+        node temp = head;
+        node next = head;
+        if (temp.next == null)//chacking for only single node is created;
+        {
+            temp.next = ptr;
+        } else {
+            while (temp.next.value != data) {
+                temp = temp.next;
+            }
+            next = temp.next;
+            temp.next = ptr;
+            ptr.next = next;
+
+        }
+
+
+    }
+    public int delAtBeg(){
+        int delValue;
+        delValue=head.value;
+        head=head.next;
+        return delValue;
+
+    }
+
+    private class node {
+
+        private int value;
+        private node next;
+
+        public node(int value) {
+            this.value = value;
+        }
+
+        public node(int value, node next) {
+            this.value = value;
+            this.next = next;
+        }//class for making the new node or making a new object;
+
+
+    }
+
+    public static void main(String[] args) {
+        ll list = new ll();//crete a new object
+        Scanner s = new Scanner(System.in);
+
+
+do {
+    System.out.println("ENTER YOUR CHOICE");
+    System.out.println("HIT 1 FOR ADD AT BEG");
+    System.out.println("HIT 2 FOR ADD AT END");
+    System.out.println("HIT 3 FOR ADD AT MID");
+    System.out.println("HIT 4 FOR DISPLAY");
+    System.out.println("HIT 5 FOR DELETING AT BEGNING");
+    int choice=s.nextInt();
+    if (choice==1){
+        System.out.println("ENTER THE DATA TO ADD BEGNING");
+        int data=s.nextInt();
+        list.insertbeg(data);
+    } else if (choice==2) {
+        System.out.println("ENTER THE DATA TO ADD AT END");
+        int data=s.nextInt();
+        list.insertatend(data);
+
+    } else if (choice==3) {
+        System.out.println("ENTER THE DATA AT THE  MID");
+        int data=s.nextInt();
+        System.out.println("ENTER THE DATA WHERE TO INSERT");
+        int data1=s.nextInt();
+        list.isertAtMid(data,data1);
+    }else if (choice==4){
+        list.display();
+    }
+    else if (choice==5){
+        int data= list.delAtBeg();
+        System.out.println("DELETED ELEMENT IS "+ data);
+    }else {
+        break;
+    }
+}while(true);
+
+    }
+}
